@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
-import './task.html';
+import './log.html';
 
 String.prototype.toHHMMSS = function () {
   var sec_num = parseInt(this, 10); // don't forget the second param
@@ -15,20 +15,17 @@ String.prototype.toHHMMSS = function () {
   return hours + ':' + minutes + ':' + seconds;
 }
 
-Template.task.helpers({
+Template.log.helpers({
   isOwner() {
     return this.owner === Meteor.userId();
   },
 });
 
-Template.task.onRendered(function bodyOnRendered() {
+Template.log.onRendered(function bodyOnRendered() {
 
-  $(".task-list").select2({
-      placeholder: "Please select a task"
-  });
 });
 
-Template.task.events({
+Template.log.events({
   
   'click .toggle-timer'(e) {
     if (!Session.get("current_timer")) {

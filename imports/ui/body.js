@@ -6,6 +6,7 @@ import { Tasks } from '../api/tasks.js';
 
 import './task.js';
 import './project.js';
+import './log.js';
 import './body.html';
 
 Template.body.onCreated(function bodyOnCreated() {
@@ -18,7 +19,7 @@ Template.body.helpers({
 
     var projects = ReactiveMethod.call("zoho.getProjects");
 
-    if(projects){
+    if (projects) {
       // console.log("\nProjects\n");
       // console.log(projects.projects);
       return projects.projects;
@@ -31,9 +32,19 @@ Template.body.helpers({
     // // Otherwise, return all of the tasks
     // return Tasks.find({}, { sort: { createdAt: -1 } });
   },
-    tasks() {
-    
-      return Session.get("tasks");
+  tasks() {
+
+    return Session.get("tasks");
+    // if (instance.state.get('hideCompleted')) {
+    //   // If hide completed is checked, filter tasks
+    //   return Tasks.find({ checked: { $ne: true } }, { sort: { createdAt: -1 } });
+    // }
+    // // Otherwise, return all of the tasks
+    // return Tasks.find({}, { sort: { createdAt: -1 } });
+  },
+  timeLogs() {
+
+    return Session.get("timeLogs");
     // if (instance.state.get('hideCompleted')) {
     //   // If hide completed is checked, filter tasks
     //   return Tasks.find({ checked: { $ne: true } }, { sort: { createdAt: -1 } });
@@ -42,23 +53,40 @@ Template.body.helpers({
     // return Tasks.find({}, { sort: { createdAt: -1 } });
   },
   taskList() {
-    if(Session.get("tasks")){ 
+    if (Session.get("tasks")) {
       Session.get("tasks").length;
-    }else{
+    } else {
       return 0;
     }
   },
 });
 
+findTask = function (item) {
+  let taskId = Session.get("taskId");
+  if (item.id_string == taskId)
+    return true;
+}
 Template.body.events({
 
-	'change .project-list': function(e){
+  'change .project-list': function (e) {
 
-    Meteor.call("zoho.getTasks", e.target.value, function(err, data){
+    Meteor.call("zoho.getTasks", e.target.value, function (err, data) {
 
-      console.log(data);
       Session.set("projectId", e.target.value);
       Session.set("tasks", data.tasks);
+    });
+  },
+  'change .task-list': function (e) {
+
+    let taskId = e.target.value;
+    let tasks = Session.get("tasks");
+    Session.set("taskId", taskId);
+    let task = tasks.find(findTask);
+    Meteor.call("zoho.getTimeLogs", task.link.timesheet.url, function(err, data){
+
+      console.log(data.timelogs.tasklogs);
+      Session.set("projectId", e.target.value);
+      Session.set("timeLogs", data.timelogs.tasklogs);
     });
   },
   'submit .new-task'(event) {

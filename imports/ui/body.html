@@ -1,28 +1,65 @@
 <body>
-  <div class="container">
-    <header>
-      <h1>Task List ({{taskCount}})</h1>
 
+	<div class="container">
+		<div class="row">
+			<div class="col s10 offset-s1">
+				{{> loginButtons}} {{#if currentUser}}
+				<div class="row">
+					<div class="col s10">
 
-      {{> loginButtons}}
-
-      {{#if currentUser}}
-        <select class="project-list">
+						<select class="project-list">
           <option></option>
           {{#each projects}}
             {{> project}}
           {{/each}}
         </select>
-        <form class="new-task">
-          <input type="text" name="text" placeholder="Filter tasks..." />
-        </form>
-      {{/if}}
-    </header>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s10">
 
-    <ul>
-      {{#each tasks}}
-        {{> task}}
-      {{/each}}
-    </ul>
-  </div>
+						<select class="task-list">
+          <option></option>
+          {{#each tasks}}
+            {{> task}}
+          {{/each}}
+        </select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s10">
+						<input type="text" name="text" placeholder="Task Notes..." />
+					</div>
+					<div class="col s2">
+						<button><i class="fa fa-stop" aria-hidden="true"></i></button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12">
+
+
+
+						<table class="striped">
+							<thead>
+								<tr>
+									<th data-field="id">Start</th>
+									<th data-field="id">Date</th>
+									<th data-field="id">Notes</th>
+									<th data-field="id">Duration</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								{{#each timeLogs}} {{> log}} {{/each}}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				{{/if}}
+			</div>
+		</div>
+
+	</div>
+
 </body>
