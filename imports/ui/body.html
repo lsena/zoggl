@@ -1,0 +1,28 @@
+<body>
+  <div class="container">
+    <header>
+      <h1>Task List ({{taskCount}})</h1>
+
+
+      {{> loginButtons}}
+
+      {{#if currentUser}}
+        <select class="project-list">
+          <option></option>
+          {{#each projects}}
+            {{> project}}
+          {{/each}}
+        </select>
+        <form class="new-task">
+          <input type="text" name="text" placeholder="Filter tasks..." />
+        </form>
+      {{/if}}
+    </header>
+
+    <ul>
+      {{#each tasks}}
+        {{> task}}
+      {{/each}}
+    </ul>
+  </div>
+</body>
