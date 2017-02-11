@@ -1,0 +1,23 @@
+version: '2'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: meteor.dockerfile
+    command: bash -c "npm install && npm start"
+    volumes:
+      - .:/code
+    ports:
+      - "3000:3000"
+      - "8000:8000"
+    user: "node"
+    links:
+      - database
+    environment:
+    - MONGO_URL=mongodb://database:27017/meteor
+
+  database:
+    image: mongo:latest
+    command: mongod --smallfiles --quiet --logpath=/dev/null
+    ports:
+      - "27017:27017"
