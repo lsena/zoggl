@@ -1,16 +1,55 @@
 body{
   background-color: #19293b;
 }
-.container{
+.app-wrapper{
   background-color:#FFFFFF;
+  height: 600px;
+  overflow: hidden;
+}
+input.search,
+label.search-label {
+  padding-left: 10px;
 }
 
-.project-list{
-  width: 100% !important;
+.projects-btn {
+  display: block;
+  margin-right: -10px;
 }
-.task-list{
-  width: 100% !important;
+.task-list {
+  /*max-height: 600px;*/
+  overflow-y: scroll;
 }
+
+.full-height {
+  position: relative;
+  height: 100%;
+}
+
+.break-line {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+
+  height: 100%;
+  width: 3px;
+
+  background-color: #26a69a;
+}
+/*.project-list,*/
+/*.task-list{*/
+  /*max-height: 300px;*/
+  /*height: 300px;*/
+
+  /**/
+/*}*/
+
+/*.project-list{*/
+  /*width: 100% !important;*/
+/*}*/
+/*.task-list{*/
+  /*width: 100% !important;*/
+/*}*/
 
 .toggle-timer{
   cursor: pointer;

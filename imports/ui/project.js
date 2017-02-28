@@ -11,9 +11,9 @@ Template.project.helpers({
 
 Template.project.onRendered(function bodyOnRendered() {
 
-  $(".project-list").select2({
-      placeholder: "Please select a project"
-  });
+  // $(".project-list").select2({
+  //     placeholder: "Please select a project"
+  // });
 });
 Template.project.events({
 	

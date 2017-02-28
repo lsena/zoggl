@@ -65,15 +65,27 @@ findTask = function (item) {
   let taskId = Session.get("taskId");
   if (item.id_string == taskId)
     return true;
-}
+};
 Template.body.events({
-
+  'keyup .search': function(e) {
+    let search = $(e.target);
+    let filter = $(search.data('filter'));
+    let value = e.target.value.toLowerCase();
+    filter.children().show();
+    filter.children().filter(function(index, el) {
+      return $(el).data('search')
+              .toLowerCase()
+              .indexOf(value) <= -1;
+    }).hide();
+  },
   'change .project-list': function (e) {
-
+    let task_lst = $('.task-list');
+    task_lst.hide();
     Meteor.call("zoho.getTasks", e.target.value, function (err, data) {
-
+      console.log("data --> ", data);
       Session.set("projectId", e.target.value);
       Session.set("tasks", data.tasks);
+      task_lst.show();
     });
   },
   'change .task-list': function (e) {
@@ -106,4 +118,14 @@ Template.body.events({
   'change .hide-completed input'(event, instance) {
     instance.state.set('hideCompleted', event.target.checked);
   },
+});
+
+Template.project.onRendered(function bodyOnRendered() {
+  $(".button-collapse").sideNav();
+  // Used for overflow control of task list
+  let tsk_lst = $('.task-list');
+  tsk_lst.show();
+  let height =  $('.app-wrapper').height() - tsk_lst.position().top;
+  tsk_lst.height(height);
+  tsk_lst.hide();
 });

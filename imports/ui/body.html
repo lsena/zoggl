@@ -1,65 +1,58 @@
 <body>
-
-	<div class="container">
-		<div class="row">
-			<div class="col s10 offset-s1">
-				{{> loginButtons}} {{#if currentUser}}
+	<div class="container app-wrapper">
+		<div class="row full-height">
+			<div class="col s4 full-height">
+				<span class="break-line"></span>
 				<div class="row">
-					<div class="col s10">
-
-						<select class="project-list">
-          <option></option>
-          {{#each projects}}
-            {{> project}}
-          {{/each}}
-        </select>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col s10">
-
-						<select class="task-list">
-          <option></option>
-          {{#each tasks}}
-            {{> task}}
-          {{/each}}
-        </select>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col s10">
-						<input type="text" name="text" placeholder="Task Notes..." />
-					</div>
-					<div class="col s2">
-						<button><i class="fa fa-stop" aria-hidden="true"></i></button>
+					<div class="col s12">
+						<div id="slide-out" class="side-nav">
+							<div class="input-field">
+                <input type="text" class="search" data-filter=".project-list" value="">
+                <label class="search-label" for="">Search Projects</label>
+              </div>
+							<div class="project-list">
+								{{#each projects}}
+									{{> project}}
+								{{/each}}
+							</div>
+						</div>
+						<a href="#" data-activates="slide-out" class="projects-btn waves-effect waves-light btn button-collapse">Projects</a>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col s12">
-
-
-
-						<table class="striped">
-							<thead>
-								<tr>
-									<th data-field="id">Start</th>
-									<th data-field="id">Date</th>
-									<th data-field="id">Notes</th>
-									<th data-field="id">Duration</th>
-								</tr>
-							</thead>
-
-							<tbody>
-								{{#each timeLogs}} {{> log}} {{/each}}
-							</tbody>
-						</table>
+						<div class="input-field">
+							<input type="text" class="search" data-filter=".task-list" value="">
+							<label class="search-label" for="">Search Tasks</label>
+						</div>
+						<div class="task-list" style="display:none">
+							{{#each tasks}}
+								{{> task}}
+							{{/each}}
+						</div>
 					</div>
 				</div>
+			</div>
+			<div class="col s8">
+				<div class="row">
+					<div class="col s12">
+						<table class="striped">
+						<thead>
+						<tr>
+							<th data-field="id">Start</th>
+							<th data-field="id">Date</th>
+							<th data-field="id">Notes</th>
+							<th data-field="id">Duration</th>
+						</tr>
+						</thead>
 
-				{{/if}}
+						<tbody>
+						{{#each timeLogs}} {{> log}} {{/each}}
+						</tbody>
+					</table>
+					</div>
+				</div>
 			</div>
 		</div>
-
 	</div>
-
 </body>

@@ -1,5 +1,5 @@
 
-let authToken = '1c87d83132647d44bb0260aa29d564a0'
+let authToken = 'e46e8a89ca1d8785c88a1745e2636168'
 let portalId = 'dengun'
 
 Meteor.methods({

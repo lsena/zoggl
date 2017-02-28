@@ -1,3 +1,6 @@
 <template name="project">
-  <option value="{{id_string}}">{{name}}</option>
+	<p data-search="{{name}}">
+		<input type="radio" id="{{id_string}}_id" name="projects" value="{{id_string}}">
+		<label for="{{id_string}}_id">{{name}}</label>
+	</p>
 </template>

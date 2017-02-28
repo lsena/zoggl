@@ -23,9 +23,9 @@ Template.task.helpers({
 
 Template.task.onRendered(function bodyOnRendered() {
 
-  $(".task-list").select2({
-      placeholder: "Please select a task"
-  });
+  // $(".task-list").select2({
+  //     placeholder: "Please select a task"
+  // });
 });
 
 Template.task.events({

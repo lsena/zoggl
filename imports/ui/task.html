@@ -1,3 +1,6 @@
 <template name="task">
-  <option value="{{this.id_string}}">{{name}}</option>
+	<p data-search="{{name}}">
+		<input type="radio" id="{{this.id_string}}_id" name="projects" value="{{this.id_string}}">
+		<label for="{{this.id_string}}_id">{{name}}</label>
+	</p>
 </template>
