@@ -28,37 +28,30 @@ Template.log.onRendered(function bodyOnRendered() {
 Template.log.events({
   
   'click .toggle-timer'(e) {
-    if (!Session.get("current_timer")) {
-      Session.set("current_timer", 0);
+    console.log(Session.get("current_timer"));
+    if (!Session.get("timer_start")) {
 
-      $(e.target).removeClass("fa-play");
-      $(e.target).addClass("fa-stop");
-      let timer = $(e.target).parent().find(".timer-text");
-      let idInterval = Meteor.setInterval(function () {
-        let next_tic = Session.get("current_timer") + 1;
-        Session.set("current_timer", next_tic);
-        timer.html(next_tic.toString().toHHMMSS());
-
-      }, 1000);
-      Session.set("current_timer_id", idInterval);
+      let taskNotes = $("#task-notes");
+      taskNotes.val($(e.target).data("task-notes"));
+      start_timer();
 
     } else {
-      let hours = Session.get("current_timer");
+      // let hours = Session.get("current_timer");
 
-      Meteor.clearInterval(Session.get("current_timer_id"));
-      Session.set("current_timer", '');
-      Session.set("current_timer_id", '');
+      // Meteor.clearInterval(Session.get("currentTimerId"));
+      // Session.set("current_timer", '');
+      // Session.set("currentTimerId", '');
 
-      let timer = $(e.target).parent().find(".timer-text");
-      timer.html("00:00:00");
-      $(e.target).removeClass("fa-stop");
-      $(e.target).addClass("fa-play");
+      // let timer = $(e.target).parent().find("#timer-label");
+      // timer.html("00:00:00");
+      // $(e.target).removeClass("fa-stop");
+      // $(e.target).addClass("fa-play");
 
-      let projectId = Session.get("projectId");
-      let taskId = $(e.target).data("task-id");
-      Meteor.call("zoho.addTime", projectId, taskId, hours.toString().toHHMMSS(), function(error, data){
-        console.log(data);
-      });
+      // let projectId = Session.get("projectId");
+      // let taskId = $(e.target).data("task-id");
+      // Meteor.call("zoho.addTime", projectId, taskId, hours.toString().toHHMMSS(), function(error, data){
+      //   console.log(data);
+      // });
     }
   },
   'click .toggle-private'() {

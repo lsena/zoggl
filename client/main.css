@@ -1,5 +1,5 @@
 body{
-  background-color: #19293b;
+  background-color: #FFFFFF;
 }
 .container{
   background-color:#FFFFFF;
@@ -14,4 +14,11 @@ body{
 
 .toggle-timer{
   cursor: pointer;
+}
+
+.select2-container--default .select2-selection--single{
+  border-radius: 0px;
+}
+.task-timer-holder tr td {
+    white-space: nowrap;
 }

@@ -1,8 +1,8 @@
 <template name="log">
 	<tr>
-		<td class="center"><i data-task-id="{{this.id_string}}" class="fa fa-play toggle-timer" aria-hidden="true"></i></td>
+		<td class="center"><i data-task-id="{{this.task.id}}" data-task-notes="{{notes}}" class="fa fa-play toggle-timer" aria-hidden="true"></i></td>
 		<td>{{log_date}}</td>
-		<td>{{notes}}</td>
-		<td class="text timer-text">{{hours_display}}</td>
+		<td class="timer-log-notes">{{notes}}</td>
+		<td class="text timer-log-text">{{hours_display}}</td>
 	</tr>
 </template>

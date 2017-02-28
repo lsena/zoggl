@@ -1,65 +1,98 @@
 <body>
 
-	<div class="container">
-		<div class="row">
-			<div class="col s10 offset-s1">
-				{{> loginButtons}} {{#if currentUser}}
-				<div class="row">
-					<div class="col s10">
+ <ul id="slide-out" class="side-nav">
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">Zoho Token</a></li>
+    <li><input type="text" id="userToken" value="{{getUserToken}}"></li>
+		<li>{{> loginButtons }}</li>
+  </ul>
 
-						<select class="project-list">
+
+  <nav style="margin-bottom:20px;">
+    <div class="nav-wrapper teal darken-4">
+      <a href="#" class="brand-logo" style="padding-left:10px;">Zoggl</a>
+      <ul id="nav-mobile" class="right">
+        <li><a data-activates="slide-out" class="activate-left-nav">OPTIONS</a></li>
+      </ul>
+    </div>
+  </nav>
+
+	<div class="row">
+		<div class="col s12">
+			 {{#if currentUser}}
+
+			<div class="row">
+				<div class="col s12">
+					<a id="sendNotification">Test MessageBox</a>
+					<select class="project-list">
           <option></option>
           {{#each projects}}
             {{> project}}
           {{/each}}
         </select>
-					</div>
 				</div>
-				<div class="row">
-					<div class="col s10">
-
-						<select class="task-list">
-          <option></option>
-          {{#each tasks}}
-            {{> task}}
-          {{/each}}
-        </select>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col s10">
-						<input type="text" name="text" placeholder="Task Notes..." />
-					</div>
-					<div class="col s2">
-						<button><i class="fa fa-stop" aria-hidden="true"></i></button>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col s12">
-
-
-
-						<table class="striped">
-							<thead>
-								<tr>
-									<th data-field="id">Start</th>
-									<th data-field="id">Date</th>
-									<th data-field="id">Notes</th>
-									<th data-field="id">Duration</th>
-								</tr>
-							</thead>
-
-							<tbody>
-								{{#each timeLogs}} {{> log}} {{/each}}
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				{{/if}}
 			</div>
-		</div>
+			<div class="row">
+				<div class="col s12" style="position:relative;">
 
+					<select class="task-list">
+          <option></option>
+		  {{#each taskLists}}
+			<optgroup label="{{this.name}}">
+				{{#each tasksGrouped this.id }}
+					{{> task}}
+				{{/each}}
+			</optgroup>
+          {{/each}}
+          
+        </select>
+				<img id="task-loader" src="/img/loader.gif" style="position: absolute;top:0px;right: 25px;width: 30px;display:none;" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<table class="task-timer-holder">
+						<tr>
+							<td width="100%">
+								<input id="task-notes" type="text" name="text" placeholder="Task Notes..." />
+							</td>
+							<td>
+								<span id="timer-label">00:00:00</span>
+							</td>
+							<td>
+								<button id="toggle-timer" class="waves-effect waves-light btn teal darken-4"><i class="fa fa-play" aria-hidden="true"></i></button>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="col s2">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+
+
+
+					<table class="striped">
+						<thead>
+							<tr>
+								<th data-field="id">Start</th>
+								<th data-field="id">Date</th>
+								<th data-field="id">Notes</th>
+								<th data-field="id">Duration</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							{{#each timeLogs}} {{> log}} {{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			{{/if}}
+		</div>
 	</div>
+
 
 </body>
